@@ -1,50 +1,40 @@
-class CountVectorizer:
+from math import log
+
+
+class TfidfTransformer:
     def __init__(self):
-        self.vocab = {}
-        self.feature_names = []
+        pass
 
-    def fit_transform(self, documents):
-        """Подсчет частоты каждого слова в документах"""
-        # строим словарь
-        for document in documents:
-            words = document.split()
-            for word in words:
-                if word not in self.vocab:
-                    self.vocab[word] = len(self.vocab)
+    def fit_transform(self, count_matrix: list[list[int]]) -> list[list[float]]:
+        """Подсчет tf*idf"""
+        tf = self.tf_transform(count_matrix)
+        idf = self.idf_transform(count_matrix)
+        res = []
+        for row in tf:
+            res.append([a * b for a, b in zip(row, idf)])
+        return res
 
-        # Создаем матрицу счетчиков слов
-        matrix = []
-        for document in documents:
-            word_count = [0] * len(self.vocab)
-            words = document.split()
-            for word in words:
-                word_count[self.vocab[word]] += 1
-            matrix.append(word_count)
+    @staticmethod
+    def tf_transform(count_matrix: list[list[int]]) -> list[list[float]]:
+        """Подсчет отношения повторений/всего"""
+        return [[el/sum(line) for el in line] for line in count_matrix]
 
-        return matrix
-
-    def get_feature_names(self):
-        """Получаем слова в порядке их появления в словаре"""
-        self.feature_names = [word for word, _ in self.vocab.items()]
-        return self.feature_names
+    @staticmethod
+    def idf_transform(count_matrix: list[list[int]]) -> list[float]:
+        """Подсчет ln((всего текстов+1)/(документов со словом+1))+1"""
+        word_in_docs = [0] * len(count_matrix[0])
+        for line in count_matrix:
+            for idx, el in enumerate(line):
+                if el > 0:
+                    word_in_docs[idx] += 1
+        text_count = len(count_matrix)
+        return [log((text_count + 1) / (num + 1)) + 1 for num in word_in_docs]
 
 
 if __name__ == '__main__':
-    # Пример использования CountVectorizer
-    documents = ["""Crock Pot Pasta
-                    Never boil pasta again""",
-                 """Pasta Pomodoro
-                    Fresh ingredients Parmesan to taste"""]
-    vectorizer = CountVectorizer()
-    matrix = vectorizer.fit_transform(documents)
-    feature_names = vectorizer.get_feature_names()
-
-    # Выводим матрицу счетчиков слов
-    print("Матрица счетчиков слов:")
-    for row in matrix:
-        print(row)
-
-    # Выводим слова
-    print("Слова:")
-    print(feature_names)
-
+    count_matrix = [
+        [1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+    ]
+    tfidf = TfidfTransformer()
+    print(tfidf.fit_transform(count_matrix))
