@@ -3,25 +3,23 @@ class CountVectorizer:
         self.vocab = {}
         self.feature_names = []
 
-    def fit_transform(self, documents):
-        """Подсчет частоты каждого слова в документах"""
-        # строим словарь
-        for document in documents:
-            words = document.split()
+    def fit_transform(self, corpus: list[list[str]]) -> list[list[int]]:
+        """Подсчет частоты каждого слова в текстах"""
+        for text in corpus:
+            words = text.lower().split()
             for word in words:
                 if word not in self.vocab:
                     self.vocab[word] = len(self.vocab)
 
-        # Создаем матрицу счетчиков слов
-        matrix = []
-        for document in documents:
+        count_matrix = []
+        for text in corpus:
             word_count = [0] * len(self.vocab)
-            words = document.split()
+            words = text.lower().split()
             for word in words:
                 word_count[self.vocab[word]] += 1
-            matrix.append(word_count)
+            count_matrix.append(word_count)
 
-        return matrix
+        return count_matrix
 
     def get_feature_names(self):
         """Получаем слова в порядке их появления в словаре"""
@@ -30,21 +28,10 @@ class CountVectorizer:
 
 
 if __name__ == '__main__':
-    # Пример использования CountVectorizer
-    documents = ["""Crock Pot Pasta
-                    Never boil pasta again""",
-                 """Pasta Pomodoro
-                    Fresh ingredients Parmesan to taste"""]
+    corpus = [
+        'Crock Pot Pasta Never boil pasta again',
+        'Pasta Pomodoro Fresh ingredients Parmesan to taste'
+    ]
     vectorizer = CountVectorizer()
-    matrix = vectorizer.fit_transform(documents)
-    feature_names = vectorizer.get_feature_names()
-
-    # Выводим матрицу счетчиков слов
-    print("Матрица счетчиков слов:")
-    for row in matrix:
-        print(row)
-
-    # Выводим слова
-    print("Слова:")
-    print(feature_names)
-
+    print([row for row in vectorizer.fit_transform(corpus)])
+    print(vectorizer.get_feature_names())
