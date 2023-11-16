@@ -51,5 +51,3 @@ coverage report -m what_is_year_now.py
 
 Вы увидите отчет в своей консоли. Если вы хотите сгенерировать html-отчет, запустите:
 coverage html what_is_year_now.py
-
-Вы должны получить тот же результат, что и в файле _results/results_unittest_mock.txt_.
