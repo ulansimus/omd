@@ -1,0 +1,17 @@
+КОМАНДА:
+python -m pytest -v test_decode.py
+
+
+
+РЕЗУЛЬТАТ:
+================================================================= test session starts =================================================================
+platform win32 -- Python 3.12.0, pytest-7.4.3, pluggy-1.3.0 -- C:\Users\ulans\PycharmProjects\testAAA\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ulans\PycharmProjects\testAAA
+collected 3 items
+
+test_decode.py::test_decode[... --- ...-SOS] PASSED                                                                                              [ 33%]
+test_decode.py::test_decode[.--. -.-- - .... --- -.-PYTHON] PASSED                                                                               [ 66%]
+test_decode.py::test_decode[..--- ----- ..--- ...---2023] PASSED                                                                                 [100%]
+
+================================================================== 3 passed in 0.01s ==================================================================

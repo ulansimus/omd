@@ -1,0 +1,28 @@
+КОМАНДА:
+python -m doctest -o NORMALIZE_WHITESPACE -v test_encode.py
+
+
+
+РЕЗУЛЬТАТ:
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode('aaa')
+Expecting:
+    Traceback (most recent call last):
+        ...
+    KeyError: 'a'
+ok
+Trying:
+    encode('AAA') # doctest: +ELLIPSIS
+Expecting:
+    '.-...'
+ok
+Trying:
+   4 tests in test_encode.encode
+4 tests in 2 items.
+4 passed and 0 failed.
+Test passed.

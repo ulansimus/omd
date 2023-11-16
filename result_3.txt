@@ -1,0 +1,17 @@
+КОМАНДА:
+python -m unittest -v test_ohe_ut.py
+
+
+
+РЕЗУЛЬТАТ:
+test_ohe0 (test_ohe_ut.TestOneHotEncoder.test_ohe0) ... ok
+test_ohe1 (test_ohe_ut.TestOneHotEncoder.test_ohe1) ... ok
+test_ohe2 (test_ohe_ut.TestOneHotEncoder.test_ohe2) ... ok
+test_ohe3 (test_ohe_ut.TestOneHotEncoder.test_ohe3) ... ok
+test_ohe4 (test_ohe_ut.TestOneHotEncoder.test_ohe4) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+
