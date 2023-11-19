@@ -1,0 +1,53 @@
+КОМАНДА 1:
+python -m unittest -v test_what_is_year_now.py
+
+
+
+РЕЗУЛЬТАТ 1:
+test_dmy_format (test_what_is_year_now.TestYearGetter.test_dmy_format) ... ok
+test_incorrect_format (test_what_is_year_now.TestYearGetter.test_incorrect_format) ... ok
+test_ymd_format (test_what_is_year_now.TestYearGetter.test_ymd_format) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.005s
+
+OK
+
+
+
+КОМАНДА 2:
+python -m coverage run -m unittest test_what_is_year_now.py
+
+
+
+РЕЗУЛЬТАТ 2:
+.....
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+OK
+
+
+
+КОМАНДА 3:
+coverage report -m what_is_year_now.py
+
+
+
+РЕЗУЛЬТАТ3:
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+what_is_year_now.py      24      4    83%   39-43
+---------------------------------------------------
+TOTAL                    24      4    83%
+
+
+
+КОМАНДА 4:
+coverage html what_is_year_now.py
+
+
+
+РЕЗУЛЬТАТ 4:
+Wrote HTML report to htmlcov\index.html
